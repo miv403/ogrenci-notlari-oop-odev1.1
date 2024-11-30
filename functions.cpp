@@ -86,14 +86,16 @@ void Student::print() {
 
 }
 
-void Student::print(int opt) {
-
+void Student::print(int opt){
+    size_t sayac{};
     switch (opt) {
     case 0:
+
         for(size_t i = 0; i < mevcut; ++i) {
             if(!isPass(i)) {
                 printLine(i);
                 cout << "kaldi" << endl;
+                sayac++;
             }
         }
         break;
@@ -102,6 +104,7 @@ void Student::print(int opt) {
             if(isPass(i)) {
                 printLine(i);
                 cout << "gecti" << endl;
+                sayac++;
             }
         }
         break;
@@ -109,7 +112,9 @@ void Student::print(int opt) {
         cerr << "Student::print() gecersiz secenek! functions.cpp:"
                 << __LINE__ << endl;
         break;
+
     }
+    cout << sayac << " ogrenci " << (opt ? "gecti" : "kaldi") << endl;
 }
 
 void Student::print(string& yol) {
