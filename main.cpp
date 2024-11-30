@@ -42,20 +42,25 @@ int main() {
 
     cout << "Hos Geldiniz." << endl;
 
+    string yol = "";
+    if(write2FilePrompt()) {
+        getFilePath(yol);
+    }
+
     int opt{};
     do {
         printMenu();
         cin >> opt;
     }while(opt < 0 || opt > 2);
-
+    if(yol == "") {
+        printTitle();
+    }
     switch (opt) {
         case 0:
-            printTitle();
-            ogrenci.print(opt);
+            ogrenci.print(opt,yol);
             break;
         case 1:
-            printTitle();
-            ogrenci.print(opt);
+            ogrenci.print(opt,yol);
             break;
         case 2:
             if(write2FilePrompt()) {

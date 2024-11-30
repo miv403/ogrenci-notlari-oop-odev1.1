@@ -86,8 +86,44 @@ void Student::print() {
 
 }
 
-void Student::print(int opt){
+void Student::print(int opt, string yol = ""){
     size_t sayac{};
+    if(yol != "") {
+
+        ofstream cikti;
+        cikti.open(yol);
+        if(!cikti) {
+            cerr << yol << " dosyasi acilamadi!" << endl;
+            return;
+        }
+
+        cikti << "ogrNo,ad,ortalama,gecmeDurumu" << endl;
+
+        if(opt > 1) {
+            for(size_t i = 0; i < mevcut; ++i) {
+                cikti << ogrNo[i] << ","
+                    <<   ad[i] << ","
+                    << ortalama[i] << ","
+                    << (isPass(i) ? "gecti" : "kaldi") << endl;
+            }
+        }else {
+            for(size_t i = 0; i < mevcut; ++i) {
+                if(opt == 0){
+                cikti << ogrNo[i] << ","
+                    <<   ad[i] << ","
+                    << ortalama[i] << ","
+                    << (isPass(i) ? "gecti" : "kaldi") << endl;
+                }else if(opt == 1) {
+                cikti << ogrNo[i] << ","
+                    <<   ad[i] << ","
+                    << ortalama[i] << ","
+                    << (isPass(i) ? "gecti" : "kaldi") << endl;
+
+                }
+            }
+        }
+        return;
+    }
     switch (opt) {
     case 0:
 
@@ -153,7 +189,7 @@ double Student::average(size_t i) {
 
 bool Student::isPass(size_t i) {
 
-    return (ortalama[i] > 50);
+    return (ortalama[i] >= 50);
 }
 
 vector<string> Student::parseLine(string& line) {
