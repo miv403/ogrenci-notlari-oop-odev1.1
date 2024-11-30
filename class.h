@@ -15,9 +15,7 @@ class Student {
 
     void readFromCSV(ifstream&);
     void evalAvg();
-    // void print();
     void print(int, string);
-    // void print(string&);
 
     private:
 

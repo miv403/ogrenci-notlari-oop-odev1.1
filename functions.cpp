@@ -77,16 +77,6 @@ void Student::evalAvg() {
         ortalama[i] = average(i);
     }
 }
-/*
-void Student::print() { // FIXME: parametresiz print() fonksiyonu kaldırılacak
-
-    for(size_t i = 0; i < mevcut; ++i) {
-        printLine(i);
-        cout << (isPass(i) ? "gecti" : "kaldi") << endl;
-    }
-
-}
-*/
 
 void Student::print(int opt = 2, string yol = ""){
 
@@ -135,27 +125,6 @@ void Student::print(int opt = 2, string yol = ""){
     }
     cout << sayac << " ogrenci " << (opt ? "gecti" : "kaldi") << endl;
 }
-
-/*
-void Student::print(string& yol) { // FIXME: print(int, string)' taşınacak
-
-    ofstream cikti;
-    cikti.open(yol);
-    if(!cikti) {
-        cerr << yol << " dosyasi acilamadi!" << endl;
-        return;
-    }
-
-    cikti << "ogrNo,ad,ortalama,gecmeDurumu" << endl;
-
-    for(size_t i = 0; i < mevcut; ++i) {
-        cikti << ogrNo[i] << ","
-            <<   ad[i] << ","
-            << ortalama[i] << ","
-            << (isPass(i) ? "gecti" : "kaldi") << endl;
-    }
-}
-*/
 
 void Student::printLine(size_t i) {
     cout << setw(12) << setfill(' ') << right;

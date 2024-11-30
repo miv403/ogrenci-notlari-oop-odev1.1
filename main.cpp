@@ -64,20 +64,7 @@ int main() {
     } else {
         ogrenci.print(opt,yol);
     }
-    /*
-    switch (opt) {
-        case 2:
-            if(write2FilePrompt()) {
-                string yol;
-                getFilePath(yol);
-                ogrenci.print(yol);
-            }else{
-                printTitle();
-                ogrenci.print();
-            }
-            break;
-    }
-*/
+
     return 0;
 }
 
