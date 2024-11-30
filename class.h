@@ -22,7 +22,6 @@ class Student {
     void printLine(size_t i); // tek satırı ekrana yazdırmak için
     double average(size_t);
     bool isPass(size_t);
-    vector<string> parseLine(string&);
     void writeLine(size_t, ostream&, int);
 
     size_t mevcut;

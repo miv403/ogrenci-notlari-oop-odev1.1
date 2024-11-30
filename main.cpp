@@ -62,7 +62,7 @@ int main() {
         printTitle();
         ogrenci.print(); // parametresiz tüm liste çıktısı
     } else {
-        ogrenci.print(opt,yol);
+        ogrenci.print(opt,yol); // sayi ve string ile çağırma
     }
 
     return 0;

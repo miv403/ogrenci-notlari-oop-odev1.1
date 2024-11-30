@@ -5,6 +5,7 @@
 #include <cstddef>
 #include <fstream>
 #include <ostream>
+#include <sstream>
 #include <string>
 
 
@@ -50,23 +51,31 @@ void Student::readFromCSV(ifstream& dosya) {
 
     string satir;
     getline(dosya, satir);
-    vector<string> tokens;
+    string hucre;
     for(size_t i = 0; i < mevcut; ++i) {
+
         getline(dosya, satir);
         
-        tokens = parseLine(satir);
+        stringstream tokens(satir);
 
-        ad[i] = tokens.at(0);
-        ogrNo[i] = tokens.at(1);
-        sinav0[i] = stod(tokens.at(2));
-        sinav1[i] = stod(tokens.at(3));
-        odev[i] = stod(tokens.at(4));
-        sinav2[i] = stod(tokens.at(5));
+        getline(tokens, hucre, ',');
+        ad[i] = hucre;
+        getline(tokens, hucre, ',');
+        ogrNo[i] = hucre;
+        getline(tokens, hucre, ',');
+        sinav0[i] = stod(hucre);
+        getline(tokens, hucre, ',');
+        sinav1[i] = stod(hucre);
+        getline(tokens, hucre, ',');
+        odev[i] = stod(hucre);
+        getline(tokens, hucre, ',');
+        sinav2[i] = stod(hucre);
 
-        if(tokens.at(6) == "") {
+        getline(tokens, hucre, ',');
+        if(hucre == "") {
             devamSayisi[i] = 0;
         }else {
-            devamSayisi[i] = stoi(tokens.at(6));
+            devamSayisi[i] = stoi(hucre);
         }
     }
 }
@@ -144,26 +153,6 @@ double Student::average(size_t i) {
 bool Student::isPass(size_t i) {
 
     return (ortalama[i] >= 50);
-}
-
-
-
-vector<string> Student::parseLine(string& line) {
-    // alınan satırın virgülle vektöre eklenmesi
-
-    vector<string> tokens; // degerlerin listesi
-    size_t pos = 0;
-    string token;
-    string delimiter = ",";
-
-    while ((pos = line.find(delimiter)) != string::npos) {
-        token = line.substr(0, pos);
-        tokens.push_back(token);
-        line.erase(0, pos + delimiter.length());
-    }
-    tokens.push_back(line);
-
-    return tokens;
 }
 
 void Student::writeLine(size_t i, ostream& file, int opt = 2) {
