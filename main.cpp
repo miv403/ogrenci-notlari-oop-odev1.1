@@ -37,6 +37,7 @@ int main() {
     Student ogrenci(mevcut);
 
     ogrenci.readFromCSV(notlarDosya);
+    notlarDosya.close();
     ogrenci.evalAvg();
 
     cout << "Hos Geldiniz." << endl;
@@ -96,7 +97,7 @@ void printTitle() {
             cout << "ortalama";
             cout << setw(18) << right;
             cout << "gecme durumu" << endl;
-            cout << setw(52) << setfill('-') << "" << endl;
+            cout << setw(55) << setfill('-') << "" << endl;
 }
 
 void printMenu() {
