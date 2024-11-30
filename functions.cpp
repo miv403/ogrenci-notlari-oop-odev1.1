@@ -8,7 +8,7 @@
 
 
 Student::Student(size_t mevcut) 
-: mevcut (mevcut){ // TODO degiskenler ilk deger verme
+: mevcut (mevcut){ 
 
     ad = new string[mevcut];
     ogrNo = new string[mevcut];
@@ -20,6 +20,16 @@ Student::Student(size_t mevcut)
 
     ortalama = new double[mevcut];
 
+    for(int i = 0; i < mevcut; ++i) {
+        ad[i] = "";
+        ogrNo[i] = "";
+        sinav0[i] = 0;
+        sinav1[i] = 0;
+        odev[i] = 0;
+        sinav2[i] = 0;
+        devamSayisi[i] = 0;
+        ortalama[i] = 0;
+    }
 }
 
 Student::~Student() {
