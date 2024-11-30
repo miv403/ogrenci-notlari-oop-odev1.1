@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <cstddef>
 #include <fstream>
+#include <ostream>
 #include <string>
 
 
@@ -76,8 +77,8 @@ void Student::evalAvg() {
         ortalama[i] = average(i);
     }
 }
-
-void Student::print() {
+/*
+void Student::print() { // FIXME: parametresiz print() fonksiyonu kaldırılacak
 
     for(size_t i = 0; i < mevcut; ++i) {
         printLine(i);
@@ -85,11 +86,12 @@ void Student::print() {
     }
 
 }
+*/
 
-void Student::print(int opt, string yol = ""){
+void Student::print(int opt = 2, string yol = ""){
+
     size_t sayac{};
-    if(yol != "") {
-
+    if(yol != "") { // dosyaya çıktı alma
         ofstream cikti;
         cikti.open(yol);
         if(!cikti) {
@@ -99,34 +101,13 @@ void Student::print(int opt, string yol = ""){
 
         cikti << "ogrNo,ad,ortalama,gecmeDurumu" << endl;
 
-        if(opt > 1) {
-            for(size_t i = 0; i < mevcut; ++i) {
-                cikti << ogrNo[i] << ","
-                    <<   ad[i] << ","
-                    << ortalama[i] << ","
-                    << (isPass(i) ? "gecti" : "kaldi") << endl;
-            }
-        }else {
-            for(size_t i = 0; i < mevcut; ++i) {
-                if(opt == 0){
-                cikti << ogrNo[i] << ","
-                    <<   ad[i] << ","
-                    << ortalama[i] << ","
-                    << (isPass(i) ? "gecti" : "kaldi") << endl;
-                }else if(opt == 1) {
-                cikti << ogrNo[i] << ","
-                    <<   ad[i] << ","
-                    << ortalama[i] << ","
-                    << (isPass(i) ? "gecti" : "kaldi") << endl;
-
-                }
-            }
-        }
+        for(size_t i = 0; i < mevcut; ++i) {
+            writeLine(i, cikti, opt);
+        }   
         return;
     }
     switch (opt) {
     case 0:
-
         for(size_t i = 0; i < mevcut; ++i) {
             if(!isPass(i)) {
                 printLine(i);
@@ -145,15 +126,18 @@ void Student::print(int opt, string yol = ""){
         }
         break;
     default:
-        cerr << "Student::print() gecersiz secenek! functions.cpp:"
-                << __LINE__ << endl;
+        for(size_t i = 0; i < mevcut; ++i) {
+            printLine(i);
+            cout << (isPass(i) ? "gecti" : "kaldi") << endl;
+        }
+        return;
         break;
-
     }
     cout << sayac << " ogrenci " << (opt ? "gecti" : "kaldi") << endl;
 }
 
-void Student::print(string& yol) {
+/*
+void Student::print(string& yol) { // FIXME: print(int, string)' taşınacak
 
     ofstream cikti;
     cikti.open(yol);
@@ -171,6 +155,7 @@ void Student::print(string& yol) {
             << (isPass(i) ? "gecti" : "kaldi") << endl;
     }
 }
+*/
 
 void Student::printLine(size_t i) {
     cout << setw(12) << setfill(' ') << right;
@@ -192,6 +177,8 @@ bool Student::isPass(size_t i) {
     return (ortalama[i] >= 50);
 }
 
+
+
 vector<string> Student::parseLine(string& line) {
     // alınan satırın virgülle vektöre eklenmesi
 
@@ -208,4 +195,24 @@ vector<string> Student::parseLine(string& line) {
     tokens.push_back(line);
 
     return tokens;
+}
+
+void Student::writeLine(size_t i, ostream& file, int opt = 2) {
+
+    if(opt == 0 && !isPass(i)) {
+        file << ogrNo[i] << ","
+            << ad[i] << ","
+            << ortalama[i] << ","
+            << "kaldi" << endl;
+    }else if(opt == 1 && isPass(i)) {
+        file << ogrNo[i] << ","
+            << ad[i] << ","
+            << ortalama[i] << ","
+            << "gecti" << endl;
+    }else if(opt == 2) {
+        file << ogrNo[i] << ","
+            << ad[i] << ","
+            << ortalama[i] << ","
+            << (isPass(i) ? "gecti" : "kaldi") << endl;
+    }
 }

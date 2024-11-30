@@ -1,4 +1,5 @@
 #include <cstddef>
+#include <ostream>
 #include <string>
 #include <fstream>
 #include <vector>
@@ -14,9 +15,9 @@ class Student {
 
     void readFromCSV(ifstream&);
     void evalAvg();
-    void print();
+    // void print();
     void print(int, string);
-    void print(string&);
+    // void print(string&);
 
     private:
 
@@ -24,6 +25,7 @@ class Student {
     double average(size_t);
     bool isPass(size_t);
     vector<string> parseLine(string&);
+    void writeLine(size_t, ostream&, int);
 
     size_t mevcut;
 

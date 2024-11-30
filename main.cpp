@@ -37,13 +37,15 @@ int main() {
     Student ogrenci(mevcut);
 
     ogrenci.readFromCSV(notlarDosya);
+    cout << DOSYA << " dosyasindan veriler okundu!" << endl;
     notlarDosya.close();
     ogrenci.evalAvg();
+    cout << "ortalamalar hesaplandi!" << endl;
 
-    cout << "Hos Geldiniz." << endl;
+    cout << endl << "Hos Geldiniz." << endl;
 
     string yol = "";
-    if(write2FilePrompt()) {
+    if(write2FilePrompt()) { // dosyaya yazdirilsin mi?
         getFilePath(yol);
     }
 
@@ -52,16 +54,18 @@ int main() {
         printMenu();
         cin >> opt;
     }while(opt < 0 || opt > 2);
-    if(yol == "") {
+
+    if(yol == "" && opt < 2) { // ekrana çıktı alma
         printTitle();
+        ogrenci.print(opt); // kalan/geçen ekrana çıktı
+    } else if(yol == "" && opt == 2) {
+        printTitle();
+        ogrenci.print(); // parametresiz tüm liste çıktısı
+    } else {
+        ogrenci.print(opt,yol);
     }
+    /*
     switch (opt) {
-        case 0:
-            ogrenci.print(opt,yol);
-            break;
-        case 1:
-            ogrenci.print(opt,yol);
-            break;
         case 2:
             if(write2FilePrompt()) {
                 string yol;
@@ -73,7 +77,7 @@ int main() {
             }
             break;
     }
-
+*/
     return 0;
 }
 
@@ -93,7 +97,7 @@ void getFilePath(string& path) {
 }
 
 
-void printTitle() {
+void printTitle() { // ekran çıktısı başlığı
             cout << setw(12) << setfill(' ') << right;
             cout << "ogrenci no";
             cout << setw(12) << setfill(' ') << right;
