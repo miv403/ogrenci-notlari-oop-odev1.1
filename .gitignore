@@ -1,0 +1,8 @@
+*.exe
+*.zip
+*.obj
+*.o
+*.bin
+*.pdf
+other/*
+.vscode/

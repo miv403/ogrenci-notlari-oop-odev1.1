@@ -26,6 +26,7 @@ class Student {
 
     size_t mevcut;
 
+    // dinamik diziler
     string * ad;
     string * ogrNo;
     double * sinav0; // ara sınav
