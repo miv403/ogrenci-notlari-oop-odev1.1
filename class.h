@@ -1,4 +1,5 @@
 #include <cstddef>
+#include <ostream>
 #include <string>
 #include <fstream>
 #include <vector>
@@ -14,19 +15,18 @@ class Student {
 
     void readFromCSV(ifstream&);
     void evalAvg();
-    void print();
-    void print(int);
-    void print(string&);
+    void print(int, string);
 
     private:
 
     void printLine(size_t i); // tek satırı ekrana yazdırmak için
     double average(size_t);
     bool isPass(size_t);
-    vector<string> parseLine(string&);
+    void writeLine(size_t, ostream&, int);
 
     size_t mevcut;
 
+    // dinamik diziler
     string * ad;
     string * ogrNo;
     double * sinav0; // ara sınav
