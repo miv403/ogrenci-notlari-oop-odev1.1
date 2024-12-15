@@ -4,3 +4,6 @@
 *.pdf
 *.dat
 *.zip
+other/*
+*.bin
+*.obj
